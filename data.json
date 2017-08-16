@@ -1,0 +1,16 @@
+{
+  "people": [{
+    "name":"John",
+    "age": "31",
+    "city":"New York"
+  }, {
+    "name": "Steven",
+    "age": "30",
+    "city": "Washington"
+  }, {
+    "name": "Aaron",
+    "age": "35",
+    "city": "NY"
+  }]
+}
+

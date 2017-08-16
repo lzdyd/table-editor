@@ -1,0 +1,25 @@
+<button id="load-data">Загрузить данные</button>
+<button id="save-data">Сохранить данные</button>
+
+<div id="main-table" class="table main-table">
+
+    <div class="table-row">
+
+        <div class="table-cell table-header">Name</div>
+        <div class="table-cell table-header">Age</div>
+        <div class="table-cell table-header">City</div>
+
+    </div>
+
+    {{#each people}}
+
+        <div class="table-row">
+            <div class="table-cell">{{name}}</div>
+            <div class="table-cell">{{age}}</div>
+            <div class="table-cell">{{city}}</div>
+        </div>
+
+    {{/each}}
+
+</div>
+
