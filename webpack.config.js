@@ -17,8 +17,9 @@ module.exports = {
 
   output: {
     path: __dirname + '/public/assets/js',
-    filename: "[name].js",
-    library: "[name]"
+    publicPath: '/',
+    filename: '[name].js',
+    library: '[name]'
   },
 
   watch: true,
@@ -30,10 +31,12 @@ module.exports = {
   devtool: NODE_ENV == 'development' ? "cheap-inline-module-source-map" : null,
 
   plugins: [
+    new webpack.optimize.ModuleConcatenationPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
     new webpack.DefinePlugin({
       NODE_ENV: JSON.stringify(NODE_ENV)
-    })
+    }),
+    new webpack.HotModuleReplacementPlugin()
   ],
 
   resolve: {
@@ -73,6 +76,10 @@ module.exports = {
 
   node: {
     fs: "empty" // avoids error messages
+  },
+
+  devServer: {
+    hot: true
   }
 
 };

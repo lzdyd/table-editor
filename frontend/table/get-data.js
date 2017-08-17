@@ -1,22 +1,22 @@
-"use strict";
+'use strict';
 
 // TODO: create custom error handler
 
 let obj;
-let getData = new XMLHttpRequest();
+const getData = new XMLHttpRequest();
 
-getData.open("GET", "../data.json");
+getData.open('GET', '../data.json');
 
-getData.onload = function() {
+getData.onload = () => {
   if (getData.status >= 200 && getData.status < 400) {
     obj = JSON.parse(getData.responseText);
   } else {
-    throw new Error("Something went wrong");
+    throw new Error('Something went wrong');
   }
 };
 
-getData.onerror = function() {
-  console.log("Connection error");
+getData.onerror = () => {
+  console.log('Connection error');
 };
 
 getData.send();

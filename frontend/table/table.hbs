@@ -5,18 +5,18 @@
 
     <div class="table-row">
 
-        <div class="table-cell table-header">Name</div>
-        <div class="table-cell table-header">Age</div>
-        <div class="table-cell table-header">City</div>
+        <div class="table-cell table-header" id="sort-name">Name</div>
+        <div class="table-cell table-header" id="sort-age">Age</div>
+        <div class="table-cell table-header" id="sort-city">City</div>
 
     </div>
 
     {{#each people}}
 
         <div class="table-row">
-            <div class="table-cell">{{name}}</div>
-            <div class="table-cell">{{age}}</div>
-            <div class="table-cell">{{city}}</div>
+            <div class="table-cell" contenteditable>{{name}}</div>
+            <div class="table-cell" contenteditable>{{age}}</div>
+            <div class="table-cell" contenteditable>{{city}}</div>
         </div>
 
     {{/each}}

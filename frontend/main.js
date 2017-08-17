@@ -1,8 +1,8 @@
-"use strict";
+'use strict';
 
 // TODO: render table dynamically (require.ensure)
 
-import Table from "./table";
+import Table from './table';
 
 let table = new Table();
 
