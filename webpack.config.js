@@ -1,23 +1,27 @@
-"use strict";
+'use strict';
 
 /*
 TODO: ExtractTextPlugin for CSS files
 TODO: avoid parsing some dirs
  */
 
-const NODE_ENV = process.env.NODE_ENV || 'development';
+const path = require('path');
 const webpack = require('webpack');
+// for Promises
+// require('babel-polyfill');
+
+const NODE_ENV = process.env.NODE_ENV || 'development';
 
 module.exports = {
-  context: __dirname + "\\frontend",
+  context: path.join(__dirname, '\\frontend'),
 
   entry: {
     main: './main'
   },
 
   output: {
-    path: __dirname + '/public/assets/js',
-    publicPath: '/',
+    path: path.join(__dirname, '/public/assets/js'),
+    publicPath: '/public/',
     filename: '[name].js',
     library: '[name]'
   },
@@ -28,7 +32,7 @@ module.exports = {
     aggregateTimeout: 100
   },
 
-  devtool: NODE_ENV == 'development' ? "cheap-inline-module-source-map" : null,
+  devtool: NODE_ENV === 'development' ? 'cheap-inline-module-source-map' : null,
 
   plugins: [
     new webpack.optimize.ModuleConcatenationPlugin(),
@@ -56,26 +60,26 @@ module.exports = {
       exclude: /(node_modules)/,
       loader: 'babel-loader',
       options: {
-        presets: ["env"]
+        presets: ['env']
       }
     }, {
       test: /\.hbs/,
-      loader: "handlebars-template-loader"
+      loader: 'handlebars-template-loader'
     }, {
       test: /\.scss$/,
       use: [{
-        loader: "style-loader" // creates style nodes from JS strings
+        loader: 'style-loader' // creates style nodes from JS strings
       }, {
-        loader: "css-loader" // translates CSS into CommonJS
+        loader: 'css-loader' // translates CSS into CommonJS
       }, {
-        loader: "sass-loader" // compiles Sass to CSS
+        loader: 'sass-loader' // compiles Sass to CSS
       }]
     }]
 
   },
 
   node: {
-    fs: "empty" // avoids error messages
+    fs: 'empty' // avoids error messages
   },
 
   devServer: {
@@ -84,7 +88,13 @@ module.exports = {
 
 };
 
-if (NODE_ENV == 'production') {
+/*
+  TODO: Check if uglify works
+ Eslint requires to use a semicolon
+ This might cause errors
+ */
+
+if (NODE_ENV === 'production') {
   module.exports.plugins.push(
     new webpack.optimize.UglifyJsPlugin({
       compress: {
@@ -93,5 +103,5 @@ if (NODE_ENV == 'production') {
         unsafe: true
       }
     })
-  )
+  );
 }

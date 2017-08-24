@@ -1,0 +1,48 @@
+button {
+  width: 170px;
+  margin: 0 5px;
+  padding: 10px 5px;
+  font-size: 12px;
+  border: none;
+  border-radius: 10px;
+  background-color: rgb(241, 71, 23);
+  color: #fff;
+  cursor: pointer;
+  outline: none;
+}
+
+.table {
+  display: table;
+  margin: 20px 0;
+
+  .table-row {
+    display: table-row;
+
+    .table-cell {
+      display: table-cell;
+      min-width: 85px;
+      padding: 10px;
+      text-align: center;
+
+    }
+
+    .table-header {
+      cursor: pointer;
+      background-color: turquoise;
+      color: #fff;
+    }
+
+  }
+
+}
+
+.table.active {
+
+  .table-cell.table-header {
+    cursor: pointer;
+    &:hover {
+      color: blue;
+    }
+  }
+
+}

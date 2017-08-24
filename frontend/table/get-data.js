@@ -1,26 +1,33 @@
 'use strict';
 
-// TODO: create custom error handler
+const get = (url) => {
+  return new Promise((resolve, reject) => {
+    const xhr = new XMLHttpRequest();
+
+    xhr.open('GET', url);
+
+    xhr.onload = () => {
+      if (xhr.status === 200) {
+        resolve(xhr.responseText);
+      } else {
+        reject(Error(xhr.statusText));
+      }
+    };
+
+    xhr.onerror = () => reject(Error('Network error'));
+
+    xhr.send();
+  });
+};
 
 let obj;
-const getData = new XMLHttpRequest();
 
-getData.open('GET', '../data.json');
+get('./data.json')
+  .then((response) => {
+    obj = JSON.parse(response);
+  })
+  .catch(error => console.error(error));
 
-getData.onload = () => {
-  if (getData.status >= 200 && getData.status < 400) {
-    obj = JSON.parse(getData.responseText);
-  } else {
-    throw new Error('Something went wrong');
-  }
-};
-
-getData.onerror = () => {
-  console.log('Connection error');
-};
-
-getData.send();
-
-export default function() {
+export default function () {
   return obj;
 }

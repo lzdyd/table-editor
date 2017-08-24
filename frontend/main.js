@@ -4,6 +4,6 @@
 
 import Table from './table';
 
-let table = new Table();
+const table = new Table();
 
 document.body.appendChild(table.elem);

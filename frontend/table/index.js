@@ -1,56 +1,32 @@
 'use strict';
 
-// TODO: create new component which handles only editable data to avoid re-rendreing full page (table-rows dir)
-// TODO: Save editted table (save-data.js)
+// TODO: CSS - fix TH onscroll
+// TODO: delete old HTML getDataBtn
+
+import TableControllers from '../table-controllers';
+import TableRows from '../table-rows';
 
 import getData from './get-data';
-import saveData from './save-data';
-import sortTable from './sort-table';
-
-import './table.scss';
-
-import template from './table.hbs';
 
 export default class Table {
   constructor() {
-    let tableData;
-
     this.elem = document.createElement('div');
     this.elem.className = 'table';
 
-    this.elem.innerHTML = template();
+    const tableControllers = new TableControllers();
+    this.elem.appendChild(tableControllers.elem);
 
     this.getDataBtn = this.elem.querySelector('#load-data');
-    this.saveData = this.elem.querySelector('#save-data');
 
     this.getDataBtn.onclick = () => {
-      tableData = getData();
-      this.elem.innerHTML = template(tableData);
+      const tableRows = new TableRows(getData());
+      const tableRowsElems = tableRows.elem.querySelectorAll('.table-row');
+      const tableRowsArray = Array.prototype.slice.call(tableRowsElems);
 
-      addEventListeners(); // Don't get why I need to do so
-
-      const mainTable = this.elem.querySelector('#main-table');
-      mainTable.classList.add('active');
-    };
-
-    this.saveData.onclick = () => {
-
-    };
-
-    let sortHandler = (sortFieldId) => {
-      this.elem.innerHTML = template(sortTable(tableData, sortFieldId));
-      addEventListeners();
-    };
-
-    let addEventListeners = () => {
-      this.sortButtons = this.elem.querySelectorAll('.table-header');
-
-      Array.from(this.sortButtons).forEach(element => {
-        element.addEventListener('click', () => {
-          sortHandler(element.id); // TODO: bumbling
-        });
+      this.tableRowsContainer = this.elem.querySelector('#main-table');
+      tableRowsArray.forEach((item) => {
+        this.tableRowsContainer.appendChild(item);
       });
     };
-
   }
 }
