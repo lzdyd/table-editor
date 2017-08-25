@@ -45,4 +45,11 @@ button {
     }
   }
 
+  .table-header[data-sort-state='discending']::after {
+    content: " \2191";
+  }
+  .table-header[data-sort-state='ascending']::after {
+    content: " \2193";
+  }
+
 }
