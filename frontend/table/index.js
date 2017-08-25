@@ -65,7 +65,7 @@ export default class Table {
           });
         });
 
-        //this.elem.querySelector(`#${sortState.sortFieldId}`).dataset.sortState = sortState.currentSortState;
+        this.elem.querySelector(`#${sortState.sortFieldId}`).dataset.sortState = sortState.currentSortState;
       }
     };
 
