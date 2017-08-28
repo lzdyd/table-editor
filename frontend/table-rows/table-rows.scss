@@ -9,3 +9,7 @@
             0 1px 0 0 #000 inset;
   }
 }
+
+.table-cell:focus {
+  outline: 1px solid blue;
+}

@@ -4,8 +4,6 @@
 
 // TODO: bubbling for buttons
 
-// TODO: add row to table
-// TODO: delete row from table
 // TODO: prevent adding invalid data
 // TODO: move renderTableData to separated controller
 
@@ -14,6 +12,7 @@ import TableRows from '../table-rows';
 
 import getData from './get-data';
 import sortData from './sort-data';
+import saveData from './save-data';
 
 export default class Table {
   constructor() {
@@ -69,14 +68,6 @@ export default class Table {
       }
     };
 
-    renderTableData.addRow = () => {
-      JSONData.people.push({
-        name: '',
-        age: '',
-        city: ''
-      });
-    };
-
     // Receives data
     this.getDataBtn = this.elem.querySelector('#load-data');
 
@@ -100,9 +91,42 @@ export default class Table {
     this.addRowBtn = this.elem.querySelector('#add-row');
 
     this.addRowBtn.onclick = () => {
+      JSONData.people.push({
+        name: '',
+        age: '',
+        city: ''
+      });
 
+      const tableRows = new TableRows(JSONData);
+      const tableRowsElems = tableRows.elem.querySelectorAll('.table-row');
+      const tableRowsArray = Array.from(tableRowsElems);
 
-      //renderTableData(JSONData);
+      const tableRowsContainer = this.elem.querySelector('#main-table');
+
+      const tableRowData = tableRowsContainer.querySelectorAll('.table-row-data');
+      for (let i = 0; i < tableRowData.length; i += 1) {
+        tableRowData[i].parentNode.removeChild(tableRowData[i]);
+      }
+
+      tableRowsArray.forEach((item) => {
+        tableRowsContainer.appendChild(item);
+      });
+    };
+
+    // Delete row
+    this.deleteRowBtn = this.elem.querySelector('#delete-row');
+
+    this.deleteRowBtn.onclick = () => {
+      JSONData.people.pop();
+      this.elem.querySelector('#main-table').removeChild(this.elem.querySelector('#main-table').lastChild);
+    };
+
+    // Save data
+    this.saveDataBtn = this.elem.querySelector('#save-data');
+
+    this.saveDataBtn.onclick = () => {
+      JSONData = saveData(this.elem.querySelectorAll('.table-row-data'));
+      console.log(JSONData);
     };
   }
 }
