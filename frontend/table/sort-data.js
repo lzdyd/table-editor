@@ -8,10 +8,15 @@ const sortData = (tableData, sortFieldId, sortState) => {
   let currentSortState = sortState;
 
   const compare = (a, b) => {
-    return (sortState === 'ascending') ? a[sortField] < b[sortField] : a[sortField] > b[sortField];
+    return (sortState === 'ascending') ? a[sortField][0].toLowerCase() < b[sortField][0].toLowerCase()
+      : a[sortField][0].toLowerCase() > b[sortField][0].toLowerCase();
   };
 
-  arr.sort(compare);
+  const compareNumbers = (a, b) => {
+    return (sortState === 'ascending') ? +a[sortField] < +b[sortField] : +a[sortField] > +b[sortField];
+  };
+
+  (sortField === 'age') ? arr.sort(compareNumbers) : arr.sort(compare);
 
   data.people = arr;
 
